@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.10
 WORKDIR /usr/src/code_challenge
 COPY ./app ./app
 COPY requirements.txt requirements.txt

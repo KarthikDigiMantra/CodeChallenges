@@ -10,11 +10,10 @@ from typing import List
 from fastapi import HTTPException, Depends
 from sqlalchemy.orm import Session
 from starlette import status
-import models
-
+from .models import Book, Author
 from fastapi import APIRouter
 from fastapi import FastAPI
-from database import get_db
+from .database import get_db
 
 app = FastAPI()
 
@@ -29,13 +28,13 @@ app = FastAPI()
 # This api accepts search criteria and sends back book details for matched criteria
 def test_books(book_id:int=None,book_title:str=None, author_name:str=None,page_n:int=0,page_count:int=10, db: Session = Depends(get_db)):
 
-    query = db.query(models.Book).join(models.Book.books_author) 
+    query = db.query(Book).join(Book.books_author) 
     if book_id:
         query = query.filter_by(id=book_id)
     if book_title:
         query = query.filter_by(title=book_title)
     if author_name:
-        query = query.filter(models.Author.name==author_name)
+        query = query.filter(Author.name==author_name)
     start_index = page_n * page_count
     query = query [start_index:page_count]
 

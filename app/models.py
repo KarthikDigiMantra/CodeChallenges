@@ -1,4 +1,4 @@
-from database import Base
+from .database import Base
 from sqlalchemy import Column, Integer, String, TIMESTAMP, Boolean, text,ForeignKey,Table
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
